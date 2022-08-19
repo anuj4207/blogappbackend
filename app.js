@@ -5,6 +5,7 @@ const port =  process.env.PORT || 3000
 const blogRoute = require('./routes/blog_route')
 const notFound = require('./middleware/not-found')
 const errorHandler = require('./middleware/error-handler')
+const cors = require('cors')
 require('dotenv').config()
 app.use(express.json())
 app.use(function(req, res, next) {
@@ -13,6 +14,7 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+app.use(cors())
 app.use('/api/v1/blog',blogRoute)
 app.use(notFound)
 app.use(errorHandler)
